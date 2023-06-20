@@ -136,59 +136,79 @@ public class Realization {
 
     int rub_tmp = nSum;
 
-    List segments = new ArrayList();
+    List<Integer> segments = new ArrayList<>();
     while (rub_tmp > 999) {
       int seg = rub_tmp / 1000;
-      segments.add(rub_tmp - (seg * 1000));
+      try {
+        segments.add(rub_tmp - (seg * 1000));
+      } catch (Exception e){ e.printStackTrace();}
       rub_tmp = seg;
     }
-    segments.add(rub_tmp);
+    try {
+      segments.add(rub_tmp);
+    } catch (Exception e){ e.printStackTrace();}
     Collections.reverse(segments);
     StringBuilder s = new StringBuilder();
     if (nSum == 0) {
-      if(sCase.equals("И"))
-      s.append("ноль");
-      if(sCase.equals("Р"))
-      s.append("ноля");
-      if(sCase.equals("Д"))
-        s.append("нолю");
-      if(sCase.equals("В"))
-        s.append("ноль");
-      if(sCase.equals("Т"))
-        s.append("нолем");
-      if(sCase.equals("П"))
-        s.append("ноле");
-      return s.toString();
-
+      switch (sCase) {
+        case "И":
+          s.append("ноль");
+          break;
+        case "Р":
+          s.append("ноля");
+          break;
+        case "Д":
+          s.append("нолю");
+          break;
+        case "В":
+          s.append("ноль");
+          break;
+        case "Т":
+          s.append("нолем");
+          break;
+        case "П":
+          s.append("ноле");
+          break;
+        default:
+          System.out.println("Something is wrong!!!");
+      }
     }
-    else if (nSum > 0) {
-      if(sCase.equals("И"))
-      extracted(sexh, sex, str100, str11, str10, forms, segments, s);
-      if (sCase.equals("Р"))
-        extracted(sexh, sexR, str100R, str11R, str10R, formsR, segments, s);
-      if (sCase.equals("Д"))
-        extracted(sexh, sexD, str100D, str11D, str10D, formsD, segments, s);
-      if (sCase.equals("B"))
-        extracted(sexh, sexV, str100V, str11V, str10V, formsV, segments, s);
-      if (sCase.equals("Т"))
-        extracted(sexh, sexT, str100T, str11T, str10T, formsT, segments, s);
-      if (sCase.equals("П"))
-        extracted(sexh, sexP, str100P, str11P, str10P, formsP, segments, s);
+    else if(nSum>0) {
+      switch (sCase) {
+        case "И":
+          extracted(sexh, sex, str100, str11, str10, forms, segments, s);
+          break;
+        case "Р":
+            extracted(sexh, sexR, str100R, str11R, str10R, formsR, segments, s);
+          break;
+        case "Д":
+            extracted(sexh, sexD, str100D, str11D, str10D, formsD, segments, s);
+          break;
+        case "В":
+            extracted(sexh, sexV, str100V, str11V, str10V, formsV, segments, s);
+          break;
+        case "Т":
+            extracted(sexh, sexT, str100T, str11T, str10T, formsT, segments, s);
+          break;
+        case "П":
+            extracted(sexh, sexP, str100P, str11P, str10P, formsP, segments, s);
+          break;
+        default:
+          System.out.println("Something is wrong!!!");
+      }
     }
-
-
 
     return s.toString();
 
   }
 
   private void extracted(int sexh, String[][] sex, String[] str100, String[] str11,
-                         String[] str10, String[][] form, List segments, StringBuilder s) {
+                         String[] str10, String[][] form, List<Integer> segments, StringBuilder s) {
     int lev = segments.size();
     for (int i= 0; i<segments.size(); i++ ) {
 
       int ri = Integer.parseInt( segments.get(i).toString());
-      int sexi = Integer.parseInt( form[lev][3].toString());
+      int sexi = Integer.parseInt( form[lev][3]);
 
       if (ri== 0 && lev>1) {
         lev--;
