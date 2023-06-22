@@ -171,6 +171,7 @@ public class Realization {
           break;
         default:
           System.out.println("Something is wrong!!!");
+          break;
       }
     }
     else if(nSum>0) {
@@ -195,6 +196,7 @@ public class Realization {
           break;
         default:
           System.out.println("Something is wrong!!!");
+          break;
       }
     }
 
